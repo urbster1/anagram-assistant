@@ -1,10 +1,21 @@
 import { prevAnagrams } from "./previous.js";
+
 let remainingLetters = document.getElementById("remainingLetters");
 let status = document.getElementById("status");
 let phraseToAnagram = document.getElementById("phraseToAnagram");
 let anagramToMake = document.getElementById("anagramToMake");
 let anagramList = document.getElementById("anagramList");
 let allShown = false;
+
+phraseToAnagram.addEventListener("keyup", () => setText());
+anagramToMake.addEventListener("keyup", () => setText());
+remainingLetters.addEventListener("click", () => shuffleRemaining());
+document.getElementById("urlButton").addEventListener("click", () => toUrl());
+document.getElementById("clear").addEventListener("click", () => { eraseText("phraseToAnagram"); setText(); });
+document.getElementById("clear2").addEventListener("click", () => { eraseText("anagramToMake"); setText(); });
+anagramList.addEventListener("click", () => showPrevious(window.event.target.id));
+document.getElementById("save").addEventListener("click", () => { save(); eraseText("anagramToMake"); setText(); });
+
 const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 const sortLetters = (letters) => {
   let lowerCaseLetters = letters.toLowerCase();
@@ -127,14 +138,11 @@ const getUrlParam = () => {
     setText();
   }
 };
-phraseToAnagram.addEventListener("keyup", () => setText());
-anagramToMake.addEventListener("keyup", () => setText());
-remainingLetters.addEventListener("click", () => shuffleRemaining());
-document.getElementById("urlButton").addEventListener("click", () => toUrl());
-document.getElementById("clear").addEventListener("click", () => { eraseText("phraseToAnagram"); setText(); });
-document.getElementById("clear2").addEventListener("click", () => { eraseText("anagramToMake"); setText(); });
-anagramList.addEventListener("click", () => showPrevious(window.event.target.id));
 
+const save = () => {
+  let savedText = document.getElementById("savedText");
+  savedText.value += document.getElementById("anagramToMake").value + '\n';
+}
 
 const listPrevious = (prevAnagrams) => {
   let sectionHeader = document.createElement("p");
