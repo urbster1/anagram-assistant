@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Anagram Assistant</title>
+    <style>
+      .wrapper {
+        width: 100%;
+        min-width: 700px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      html {
+        background-color: #EEE;
+      }
+      a {
+        color: black;
+      }
+      p {
+        margin-left: 3px;
+        margin-right: 0;
+        margin-top: 8px;
+        margin-bottom: 8px;
+      }
+      .container {
+        display: flex;
+        align-items: stretch;
+        width: 100%;
+        min-width: 700px;
+        max-width: 1000px;
+      }
+      input {
+        min-width: 400px;
+        width: 70%;
+        resize: none;
+        font-family: monospace;
+      }
+      .button {
+        background-color: lightgray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90px;
+        min-width: 60px;
+        margin-left: 3px;
+        border: 1px solid #666;
+        border-radius: 3px;
+      }
+      .button:hover {
+        background-color: gray;
+        color: white;
+        border: 1px solid black;
+        cursor: pointer;
+      }
+      #status {
+        font-family: monospace;
+        font-weight: bold;
+        padding: 3px;
+        margin: 3px;
+      }
+      #remainingLetters {
+        font-family: monospace;
+        color: #103080;
+        padding: 3px;
+        margin: 3px;
+      }
+      #remainingLetters:hover {
+        cursor:pointer;
+      }
+      #savedText {
+        height: 10em;
+        width: 100%;
+        max-width: 900px;
+      }
+      #textareaContainer {
+        justify-items: stretch;
+        align-items: stretch;
+      }
+      .phrase {
+        margin-left: 8px;
+        text-decoration: underline;
+        color: #e31b6b;
+      }
+      .phrase:hover {
+        cursor: pointer;
+        color: #a30b3b;
+      }
+      .anagram {
+        margin-left: 10px;
+        color:#103080;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1>Anagram Assistant</h1>
+      <div style="float: right; margin-right: 30%; color: gray;">
+        Click remaining letters to scramble
+      </div>
+      <p>Phrase to anagram</p>
+      <div class="container">
+        <input name="phraseToAnagram" id="phraseToAnagram" />
+        <div class="button" id="clear" >Clear</div>
+        <div class="button" id="urlButton" >To URL</div>
+      </div>
+      <p>
+        Remaining letters: &nbsp;&nbsp;<label
+          id="remainingLetters"
+        ></label>
+      </p>
+      <p>Anagram to make &nbsp;&nbsp;<label id="status" style="font-family: monospace;"></label></p>
+      <div class="container">
+        <input name="anagramToMake" id="anagramToMake" style="width: 70%;"" />
+        <div id="clear2" class="button" >Clear</div>
+      </div>
+      <p><a name="saved">Saved text</a></p>
+      <div class="container" id="textareaContainer">
+        <textarea id="savedText" rows="10"></textarea>
+      </div>
+      <div id="anagramList"></div>
+    </div>
+    <script src="./previous.js" type="module"></script>
+    <script src="./anagrammer.js" type="module"></script>
+  </body>
+</html>
