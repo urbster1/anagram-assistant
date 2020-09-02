@@ -110,6 +110,9 @@ const toUrl = () => {
     window.location.href =
       `${window.location.protocol}//${window.location.host}${window.location.pathname}?a=` +
       phraseToAnagram.value;
+  } else {
+    window.location.href =
+      `${window.location.protocol}//${window.location.host}${window.location.pathname}
   }
 };
 const eraseText = (id) => (document.getElementById(id).value = "");
