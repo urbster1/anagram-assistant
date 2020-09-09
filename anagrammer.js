@@ -141,7 +141,7 @@ const getUrlParam = () => {
 
 const save = () => {
   let savedText = document.getElementById("savedText");
-  savedText.value += document.getElementById("anagramToMake").value + '\n';
+  savedText.value += '\n' + document.getElementById("anagramToMake").value;
 }
 
 const listPrevious = (prevAnagrams) => {
