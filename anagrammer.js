@@ -11,10 +11,22 @@ phraseToAnagram.addEventListener("keyup", () => setText());
 anagramToMake.addEventListener("keyup", () => setText());
 remainingLetters.addEventListener("click", () => shuffleRemaining());
 document.getElementById("urlButton").addEventListener("click", () => toUrl());
-document.getElementById("clear").addEventListener("click", () => { eraseText("phraseToAnagram"); setText(); });
-document.getElementById("clear2").addEventListener("click", () => { eraseText("anagramToMake"); setText(); });
-anagramList.addEventListener("click", () => showPrevious(window.event.target.id));
-document.getElementById("save").addEventListener("click", () => { save(); eraseText("anagramToMake"); setText(); });
+document.getElementById("clear").addEventListener("click", () => {
+  eraseText("phraseToAnagram");
+  setText();
+});
+document.getElementById("clear2").addEventListener("click", () => {
+  eraseText("anagramToMake");
+  setText();
+});
+anagramList.addEventListener("click", () =>
+  showPrevious(window.event.target.id)
+);
+document.getElementById("save").addEventListener("click", () => {
+  save();
+  eraseText("anagramToMake");
+  setText();
+});
 
 const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 const sortLetters = (letters) => {
@@ -63,11 +75,9 @@ const setText = () => {
   ) {
     remainingLetters.innerText = "";
     if (firstInput === secondInput) {
-      remainingLetters.style.backgroundColor =
-        "#EEE";
+      remainingLetters.style.backgroundColor = "#EEE";
       remainingLetters.style.border = "0";
-      status.innerText =
-        "Rearrange the letters to make an anagram!";
+      status.innerText = "Rearrange the letters to make an anagram!";
       status.style.color = "black";
       status.style.fontWeight = "bold";
       status.style.backgroundColor = "#F0D0D0";
@@ -75,8 +85,7 @@ const setText = () => {
       status.style.borderRadius = "3px";
       status.style.textShadow = "0px 0px 1px red";
     } else {
-      remainingLetters.style.backgroundColor =
-        "#EEE";
+      remainingLetters.style.backgroundColor = "#EEE";
       remainingLetters.style.border = "0";
       status.innerText = "*Perfect anagram!*";
       status.style.color = "green";
@@ -110,6 +119,8 @@ const toUrl = () => {
     window.location.href =
       `${window.location.protocol}//${window.location.host}${window.location.pathname}?a=` +
       phraseToAnagram.value;
+  } else {
+    window.location.href = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
   }
 };
 const eraseText = (id) => (document.getElementById(id).value = "");
@@ -141,12 +152,13 @@ const getUrlParam = () => {
 
 const save = () => {
   let savedText = document.getElementById("savedText");
-  savedText.value += '\n' + document.getElementById("anagramToMake").value;
-}
+  savedText.value += "\n" + document.getElementById("anagramToMake").value;
+};
 
 const listPrevious = (prevAnagrams) => {
   let sectionHeader = document.createElement("p");
-  sectionHeader.innerHTML = 'Previous anagrams (<span id="all" style="text-decoration: underline; cursor: pointer;">Show All</span>)';
+  sectionHeader.innerHTML =
+    'Previous anagrams (<span id="all" style="text-decoration: underline; cursor: pointer;">Show All</span>)';
   anagramList.appendChild(sectionHeader);
   for (let anagram of prevAnagrams) {
     let nextAnagramPhrase = document.createElement("div");
@@ -164,18 +176,27 @@ const listPrevious = (prevAnagrams) => {
 };
 
 const showPrevious = (anagramID) => {
-  if (anagramID === "all" ) {
+  if (anagramID === "all") {
     for (let anagram of prevAnagrams) {
       let nextAnagram = document.getElementById(prevAnagrams.indexOf(anagram));
-      allShown === false ? nextAnagram.style.display = "inline-block" : nextAnagram.style.display = "none";
+      allShown === false
+        ? (nextAnagram.style.display = "inline-block")
+        : (nextAnagram.style.display = "none");
     }
-    allShown === false ? document.getElementById("all").innerText = "Hide All" : document.getElementById("all").innerText = "Show All";
-    allShown === false ? allShown = true : allShown = false;
+    allShown === false
+      ? (document.getElementById("all").innerText = "Hide All")
+      : (document.getElementById("all").innerText = "Show All");
+    allShown === false ? (allShown = true) : (allShown = false);
   } else {
-  let anagramsShown = anagramID.replace("_phrase","");
-  let anagramDiv = document.getElementById(anagramsShown);
-  anagramDiv.style.display !== "none" ? anagramDiv.style.display = "none" : anagramDiv.style.display = "inline-block";
-  };
+    let anagramsShown = anagramID.replace("_phrase", "");
+    let anagramDiv = document.getElementById(anagramsShown);
+    anagramDiv.style.display !== "none"
+      ? (anagramDiv.style.display = "none")
+      : (anagramDiv.style.display = "inline-block");
+  }
 };
 
-window.onload = () => { getUrlParam(); listPrevious(prevAnagrams); }
+window.onload = () => {
+  getUrlParam();
+  listPrevious(prevAnagrams);
+};
