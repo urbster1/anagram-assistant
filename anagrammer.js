@@ -110,8 +110,6 @@ const toUrl = () => {
     window.location.href =
       `${window.location.protocol}//${window.location.host}${window.location.pathname}?a=` +
       phraseToAnagram.value;
-  } else {
-    window.location.href = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
   }
 };
 const eraseText = (id) => (document.getElementById(id).value = "");
@@ -150,16 +148,15 @@ const listPrevious = (prevAnagrams) => {
   let sectionHeader = document.createElement("p");
   sectionHeader.innerHTML = 'Previous anagrams (<span id="all" style="text-decoration: underline; cursor: pointer;">Show All</span>)';
   anagramList.appendChild(sectionHeader);
-  let anagrams = Object.keys(prevAnagrams);
-  for (let anagram of anagrams) {
+  for (let anagram of prevAnagrams) {
     let nextAnagramPhrase = document.createElement("div");
     let nextAnagrams = document.createElement("div");
-    nextAnagramPhrase.id = anagram + "_phrase";
+    nextAnagramPhrase.id = prevAnagrams.indexOf(anagram) + "_phrase";
     nextAnagramPhrase.className = "phrase";
-    nextAnagramPhrase.innerText = prevAnagrams[anagram].phrase;
+    nextAnagramPhrase.innerText = anagram.phrase;
     nextAnagrams.id = anagram;
     nextAnagrams.className = "anagram";
-    nextAnagrams.innerText = prevAnagrams[anagram].anagrams;
+    nextAnagrams.innerText = anagram.anagrams;
     nextAnagrams.style.display = "none";
     anagramList.appendChild(nextAnagramPhrase);
     anagramList.appendChild(nextAnagrams);
@@ -168,8 +165,8 @@ const listPrevious = (prevAnagrams) => {
 
 const showPrevious = (anagramID) => {
   if (anagramID === "all" ) {
-    let anagrams = Object.keys(prevAnagrams);
-    for (let anagram of anagrams) {
+    for (let anagram of prevAnagrams) {
+    let anagrams = prevAnagrams;
       let nextAnagram = document.getElementById(anagram);
       allShown === false ? nextAnagram.style.display = "inline-block" : nextAnagram.style.display = "none";
     }
