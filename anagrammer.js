@@ -154,7 +154,7 @@ const listPrevious = (prevAnagrams) => {
     nextAnagramPhrase.id = prevAnagrams.indexOf(anagram) + "_phrase";
     nextAnagramPhrase.className = "phrase";
     nextAnagramPhrase.innerText = anagram.phrase;
-    nextAnagrams.id = anagram;
+    nextAnagrams.id = prevAnagrams.indexOf(anagram);
     nextAnagrams.className = "anagram";
     nextAnagrams.innerText = anagram.anagrams;
     nextAnagrams.style.display = "none";
@@ -166,8 +166,7 @@ const listPrevious = (prevAnagrams) => {
 const showPrevious = (anagramID) => {
   if (anagramID === "all" ) {
     for (let anagram of prevAnagrams) {
-    let anagrams = prevAnagrams;
-      let nextAnagram = document.getElementById(anagram);
+      let nextAnagram = document.getElementById(prevAnagrams.indexOf(anagram));
       allShown === false ? nextAnagram.style.display = "inline-block" : nextAnagram.style.display = "none";
     }
     allShown === false ? document.getElementById("all").innerText = "Hide All" : document.getElementById("all").innerText = "Show All";
