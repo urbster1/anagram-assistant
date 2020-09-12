@@ -89,13 +89,21 @@
         margin-left: 10px;
         color:#103080;
       }
+      #reset {
+        text-decoration: underline;
+        margin-left: 10px;
+      }
+      #reset:hover {
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
     <div class="wrapper">
       <h1>Anagram Assistant</h1>
-      <div style="float: right; margin-right: 30%; color: gray;">
-        Click remaining letters to scramble
+      <div style="float: right; margin-right: 28%; color: gray;">
+        Click remaining letters to scramble.
+        <span id="reset">Reset</span>
       </div>
       <p>Phrase to anagram</p>
       <div class="container">

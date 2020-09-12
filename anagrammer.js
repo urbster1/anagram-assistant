@@ -5,6 +5,7 @@ let status = document.getElementById("status");
 let phraseToAnagram = document.getElementById("phraseToAnagram");
 let anagramToMake = document.getElementById("anagramToMake");
 let anagramList = document.getElementById("anagramList");
+let reset = document.getElementById("reset");
 let allShown = false;
 
 phraseToAnagram.addEventListener("keyup", () => setText());
@@ -26,6 +27,11 @@ document.getElementById("save").addEventListener("click", () => {
   save();
   eraseText("anagramToMake");
   setText();
+});
+reset.addEventListener("click", () => {
+  eraseText("phraseToAnagram");
+  eraseText("anagramToMake");
+  window.location.href = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
 });
 
 const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
